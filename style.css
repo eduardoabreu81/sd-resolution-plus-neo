@@ -1,0 +1,269 @@
+/* Resolution Plus for Forge Neo: the controls next to Width / Height and the presets popup. Colors come from the
+   Gradio theme variables, so light, dark and forge-neo-theme all apply. */
+
+.resolution-plus-tools {
+    display: contents;
+}
+
+/* Forge's tool column next to Width / Height: ratio, presets, ⇅ with a tighter gap, so it stays as high as the two
+   sliders */
+div.dimensions-tools.resolution-plus-column {
+    gap: 6px !important;
+}
+
+/* the three buttons are Forge ToolButtons (same classes as ⇅); only the text inside is styled here */
+.resolution-plus-tools .resolution-plus-button {
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.resolution-plus-tools .resolution-plus-mode {
+    font-weight: 500;
+    color: var(--body-text-color-subdued);
+}
+
+.resolution-plus-label {
+    font-size: 12px;
+    line-height: 1;
+}
+
+.resolution-plus-tools .resolution-plus-mode.resolution-plus-on {
+    color: var(--body-text-color);
+    font-weight: 600;
+}
+
+.resolution-plus-tools .resolution-plus-button svg {
+    display: block;
+}
+
+.resolution-plus-tools .resolution-plus-button.resolution-plus-open {
+    box-shadow: inset 0 0 0 1px var(--border-color-accent, var(--border-color-primary));
+}
+
+.resolution-plus-menu {
+    position: fixed;
+    z-index: 1000;
+    box-sizing: border-box;
+    min-width: 4.5em;
+    max-height: min(24em, calc(100vh - 16px));
+    overflow-y: auto;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border: 1px solid var(--border-color-primary);
+    border-radius: var(--radius-lg, 8px);
+    background: var(--background-fill-primary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.resolution-plus-menu button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    min-height: 28px;
+    padding: 0 0.7em;
+    border: 0;
+    border-radius: var(--radius-md, 6px);
+    background: transparent;
+    color: var(--body-text-color);
+    font-size: var(--text-sm, 13px);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.resolution-plus-menu button:hover {
+    background: var(--background-fill-secondary);
+}
+
+.resolution-plus-menu button.selected {
+    background: var(--button-secondary-background-fill);
+    font-weight: 600;
+}
+
+.resolution-plus-readout {
+    padding: 0 var(--block-padding, 0.5em);
+    color: var(--body-text-color-subdued);
+    font-size: var(--text-xs, 0.75em);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+.resolution-plus-popup {
+    position: fixed;
+    z-index: 1000;
+    box-sizing: border-box;
+    width: min(36em, calc(100vw - 16px));
+    max-height: min(34em, calc(100vh - 16px));
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color-primary);
+    border-radius: var(--radius-lg, 8px);
+    background: var(--background-fill-primary);
+    color: var(--body-text-color);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+.resolution-plus-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.5em;
+    border-bottom: 1px solid var(--border-color-primary);
+}
+
+.resolution-plus-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25em;
+    flex: 1;
+}
+
+.resolution-plus-nav button,
+.resolution-plus-close {
+    padding: 3px 8px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md, 6px);
+    background: transparent;
+    color: var(--body-text-color-subdued);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.resolution-plus-nav button:hover,
+.resolution-plus-close:hover {
+    color: var(--body-text-color);
+    background: var(--background-fill-secondary);
+}
+
+.resolution-plus-nav button.selected {
+    color: var(--body-text-color);
+    border-color: var(--border-color-primary);
+    background: var(--background-fill-secondary);
+}
+
+.resolution-plus-close {
+    font-size: 1.2em;
+    line-height: 1;
+}
+
+.resolution-plus-body {
+    overflow-y: auto;
+    padding: 0 0.6em 0.6em;
+}
+
+/* one row per ratio: label | portrait | landscape; square sizes span both columns */
+.resolution-plus-row {
+    display: grid;
+    grid-template-columns: 3.6em minmax(0, 1fr) minmax(0, 1fr);
+    gap: 4px 8px;
+    align-items: start;
+    padding: 6px 0;
+    border-top: 1px solid var(--border-color-primary);
+}
+
+.resolution-plus-row.resolution-plus-colhead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 6px 0 4px;
+    border-top: 0;
+    background: var(--background-fill-primary);
+    color: var(--body-text-color-subdued);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.resolution-plus-colhead span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.resolution-plus-rowlabel {
+    padding-top: 5px;
+    color: var(--body-text-color-subdued);
+    font-size: 11px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+/* --rp-per-cell (set by the script from the page on screen): 1 when every cell holds one size (the megapixel pages),
+   so the size fills its column; 2 when cells hold more (My presets) */
+.resolution-plus-cell {
+    display: grid;
+    grid-template-columns: repeat(var(--rp-per-cell, 2), minmax(0, 1fr));
+    gap: 4px;
+}
+
+.resolution-plus-cell.resolution-plus-wide {
+    grid-column: 2 / 4;
+    column-gap: 8px;
+    grid-template-columns: repeat(calc(var(--rp-per-cell, 2) * 2), minmax(0, 1fr));
+}
+
+.resolution-plus-none {
+    display: block;
+    padding-top: 5px;
+    color: var(--body-text-color-subdued);
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+.resolution-plus-chip {
+    box-sizing: border-box;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 6px 10px;
+    border: 1px solid var(--border-color-primary);
+    border-radius: 5px;
+    background: var(--background-fill-secondary);
+    color: var(--body-text-color);
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.resolution-plus-chip:hover {
+    border-color: var(--color-accent, var(--border-color-accent));
+}
+
+.resolution-plus-chip.selected {
+    border-color: var(--color-accent, var(--border-color-accent));
+    box-shadow: inset 0 0 0 1px var(--color-accent, var(--border-color-accent));
+}
+
+.resolution-plus-size {
+    font-size: 12px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.resolution-plus-meta {
+    color: var(--body-text-color-subdued);
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+}
+
+.resolution-plus-empty {
+    margin: 1em 0;
+    color: var(--body-text-color-subdued);
+    font-size: var(--text-sm, 0.85em);
+}
