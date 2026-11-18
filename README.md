@@ -1,3 +1,7 @@
+<p align="center">
+  <img src=".github/banner.jpg" alt="Resolution Plus for Forge Neo banner"/>
+</p>
+
 # 📐 Resolution Plus for Forge Neo
 
 <div align="center">
