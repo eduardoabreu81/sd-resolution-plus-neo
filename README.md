@@ -20,7 +20,7 @@ Models like **MiniMax H3 Image** generate natively far above 2048 x 2048, but th
 <p align="center"><img src=".github/images/controls.jpg" alt="Width 2752 and Height 1536, the 16:9 ratio button, the presets button and Forge's swap button, and the size line 2752 x 1536, 4.03 MP, 16:9, max 8192" width="900"></p>
 
 > [!Important]
-> Nothing of Forge Neo is changed and generation is never touched: the extension sets the sliders' maximum when the UI is built and fills Width / Height for you. It replaces [sd-aspect-ratio-plus](https://github.com/anxety-solo/sd-aspect-ratio-plus) - turn that one off (see [Coming from Aspect Ratio+](#-coming-from-aspect-ratio)).
+> Nothing of Forge Neo is changed and generation is never touched: the extension sets the sliders' maximum when the UI is built and fills Width / Height for you. Other ratio extensions add their own controls in the same place - use one at a time (see [Other ratio extensions](#-other-ratio-extensions)).
 
 ---
 
@@ -31,7 +31,7 @@ Models like **MiniMax H3 Image** generate natively far above 2048 x 2048, but th
 - [Installation](#-installation)
 - [How to Use](#%EF%B8%8F-how-to-use)
 - [Settings](#%EF%B8%8F-settings)
-- [Coming from Aspect Ratio+](#-coming-from-aspect-ratio)
+- [Other ratio extensions](#-other-ratio-extensions)
 - [How the Ceiling Is Lifted](#-how-the-ceiling-is-lifted)
 - [Credits](#-credits)
 
@@ -87,7 +87,7 @@ Models like **MiniMax H3 Image** generate natively far above 2048 x 2048, but th
 
 1. In Forge Neo, open **Extensions > Install from URL**
 2. Paste `https://github.com/eduardoabreu81/sd-resolution-plus-neo` and click **Install**
-3. Turn **sd-aspect-ratio-plus** off in **Extensions**, if you have it
+3. Turn any other ratio extension off in **Extensions** (sd-aspect-ratio-plus, Aspect Ratio Helper...), if you have one
 4. Restart Forge Neo
 
 ## 🛠️ How to Use
@@ -130,11 +130,13 @@ One group per ratio, with both orientations in it; the popup sorts each size int
 
 `>` starts a group, `#` a comment, and each line is `width x height`.
 
-## 🤝 Coming from Aspect Ratio+
+## 🤝 Other Ratio Extensions
 
-The preset list uses the same text format as [sd-aspect-ratio-plus](https://github.com/anxety-solo/sd-aspect-ratio-plus), and the first time Resolution Plus runs, **My presets** starts from your Aspect Ratio+ list. Its separate *Portrait* and *Landscape* groups still work; merging each pair into one group per ratio gives the side-by-side rows.
+Ratio extensions put their controls next to Width / Height, so **keep one of them on at a time**.
 
-Both extensions add buttons next to Width / Height, and Aspect Ratio+ sets the fields' maximum back to the one in `ui-config.json` (usually 2048), so **turn Aspect Ratio+ off** (the console warns when both are on).
+- **Aspect Ratio+** (`sd-aspect-ratio-plus`, by anxety-solo, no longer on GitHub) - if you still have it installed, the first time Resolution Plus runs, **My presets** starts from its preset list, which uses the same text format; its separate *Portrait* and *Landscape* groups still work, and merging each pair into one group per ratio gives the side-by-side rows. Turn it off afterwards: it also sets the fields' maximum back to the one in `ui-config.json` (usually 2048). Forge's console warns when both are on
+- **[Aspect Ratio Helper (Neo)](https://github.com/abzaloff/forge-neo-aspect-ratio-helper)** by abzaloff, the Forge Neo fork of [thomasasfk's Aspect Ratio Helper](https://github.com/thomasasfk/sd-webui-aspect-ratio-helper) - a ratio dropdown and scale buttons; not tested side by side with Resolution Plus
+- **[SD Simple Dimension Preset](https://github.com/gutris1/sd-simple-dimension-preset)** by gutris1 - a preset button for width and height; not tested side by side with Resolution Plus
 
 ## 🧭 How the Ceiling Is Lifted
 
@@ -145,7 +147,7 @@ Resolution Plus applies its maximum right after `ui-config.json` is read, so it 
 ## 🙏 Credits
 
 - [Forge Neo](https://github.com/Haoming02/sd-webui-forge-classic/tree/neo) by Haoming02
-- [sd-aspect-ratio-plus](https://github.com/anxety-solo/sd-aspect-ratio-plus) by anxety-solo, for the ratio lock and the preset list format
+- Aspect Ratio+ (`sd-aspect-ratio-plus`) by anxety-solo, for the preset list format; [Aspect Ratio Helper](https://github.com/thomasasfk/sd-webui-aspect-ratio-helper) by thomasasfk, for the ratio lock and the swap that flips the ratio; [SD Simple Dimension Preset](https://github.com/gutris1/sd-simple-dimension-preset) by gutris1, for the presets button
 - The idea came from [aoleg77's post on MiniMax H3 Image in Forge Neo](https://www.reddit.com/r/StableDiffusion/comments/1xt3ovz/) and BlackSwanTW's note on `ui-config.json` there
 
 ---
