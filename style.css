@@ -5,6 +5,11 @@
     display: contents;
 }
 
+/* the Ratio button steps aside while Aspect Ratio Helper (Neo) handles the ratio */
+.resolution-plus-tools .resolution-plus-hidden {
+    display: none !important;
+}
+
 /* Forge's tool column next to Width / Height: ratio, presets, ⇅ with a tighter gap, so it stays as high as the two
    sliders */
 div.dimensions-tools.resolution-plus-column {

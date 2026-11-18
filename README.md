@@ -8,7 +8,7 @@
 
 [![Forge Neo](https://img.shields.io/badge/Forge-Neo-blue)](https://github.com/Haoming02/sd-webui-forge-classic/tree/neo)
 [![Gradio](https://img.shields.io/badge/Gradio-4.40.0-orange)](https://gradio.app/)
-[![Version](https://img.shields.io/badge/Version-0.1.0-brightgreen)](https://github.com/eduardoabreu81/sd-resolution-plus-neo)
+[![Version](https://img.shields.io/badge/Version-0.1.1-brightgreen)](https://github.com/eduardoabreu81/sd-resolution-plus-neo)
 [![License](https://img.shields.io/badge/License-AGPL--3.0-green.svg)](LICENSE)
 
 > **Extension for [Stable Diffusion WebUI Forge - Neo](https://github.com/Haoming02/sd-webui-forge-classic/tree/neo)**
@@ -20,7 +20,7 @@ Models like **MiniMax H3 Image** generate natively far above 2048 x 2048, but th
 <p align="center"><img src=".github/images/controls.jpg" alt="Width 2752 and Height 1536, the 16:9 ratio button, the presets button and Forge's swap button, and the size line 2752 x 1536, 4.03 MP, 16:9, max 8192" width="900"></p>
 
 > [!Important]
-> Nothing of Forge Neo is changed and generation is never touched: the extension sets the sliders' maximum when the UI is built and fills Width / Height for you. Other ratio extensions add their own controls in the same place - use one at a time (see [Other ratio extensions](#-other-ratio-extensions)).
+> Nothing of Forge Neo is changed and generation is never touched: the extension sets the sliders' maximum when the UI is built and fills Width / Height for you. It works side by side with [Aspect Ratio Helper (Neo)](https://github.com/abzaloff/forge-neo-aspect-ratio-helper) (see [Other ratio extensions](#-other-ratio-extensions)).
 
 ---
 
@@ -38,6 +38,11 @@ Models like **MiniMax H3 Image** generate natively far above 2048 x 2048, but th
 ---
 
 ## 🆕 What's New
+
+### v0.1.1 - Works with Aspect Ratio Helper (Neo)
+
+- With [Aspect Ratio Helper (Neo)](https://github.com/abzaloff/forge-neo-aspect-ratio-helper) on, the **ratio lock and ⇅ are left to it**: the Ratio button steps aside, while the presets, the megapixel pages, the size line and the slider maximum stay - see [Other ratio extensions](#-other-ratio-extensions)
+- The presets button sits before Aspect Ratio Helper's controls, whichever extension sets up first
 
 ### v0.1.0 - First Release
 
@@ -87,7 +92,7 @@ Models like **MiniMax H3 Image** generate natively far above 2048 x 2048, but th
 
 1. In Forge Neo, open **Extensions > Install from URL**
 2. Paste `https://github.com/eduardoabreu81/sd-resolution-plus-neo` and click **Install**
-3. Turn any other ratio extension off in **Extensions** (sd-aspect-ratio-plus, Aspect Ratio Helper...), if you have one
+3. Turn **sd-aspect-ratio-plus** off in **Extensions**, if you have it (Aspect Ratio Helper (Neo) can stay on)
 4. Restart Forge Neo
 
 ## 🛠️ How to Use
@@ -109,6 +114,7 @@ Models like **MiniMax H3 Image** generate natively far above 2048 x 2048, but th
 | My presets | your Aspect Ratio+ list, if any | see below |
 | With the ratio Off, the tier pages start with the current proportion | on | |
 | Show the controls in img2img too | on | in *Resize to*. Needs **Reload UI** |
+| With Aspect Ratio Helper (Neo) on, leave the ratio lock and ⇅ to it | on | hides the Ratio button while that extension is on |
 
 Changes to the lists show up after **Apply settings**, also after a browser refresh.
 
@@ -132,10 +138,10 @@ One group per ratio, with both orientations in it; the popup sorts each size int
 
 ## 🤝 Other Ratio Extensions
 
-Ratio extensions put their controls next to Width / Height, so **keep one of them on at a time**.
+Ratio extensions put their controls next to Width / Height too.
 
+- **[Aspect Ratio Helper (Neo)](https://github.com/abzaloff/forge-neo-aspect-ratio-helper)** by abzaloff, the Forge Neo fork of [thomasasfk's Aspect Ratio Helper](https://github.com/thomasasfk/sd-webui-aspect-ratio-helper) - **works alongside**. Its ratio dropdown (with 🖼️, the ratio of the img2img picture) and its ⇅ take over the ratio lock, and Resolution Plus hides its own Ratio button so two locks never pull the sliders apart; the presets, the megapixel pages, the size line and the slider maximum stay. Its scale buttons (percentages, maximum and minimum dimension) can now go past 2048 too, since it follows the sliders' maximum. To keep both Ratio controls, turn off *With Aspect Ratio Helper (Neo) on, leave the ratio lock and ⇅ to it* in Settings
 - **Aspect Ratio+** (`sd-aspect-ratio-plus`, by anxety-solo, no longer on GitHub) - if you still have it installed, the first time Resolution Plus runs, **My presets** starts from its preset list, which uses the same text format; its separate *Portrait* and *Landscape* groups still work, and merging each pair into one group per ratio gives the side-by-side rows. Turn it off afterwards: it also sets the fields' maximum back to the one in `ui-config.json` (usually 2048). Forge's console warns when both are on
-- **[Aspect Ratio Helper (Neo)](https://github.com/abzaloff/forge-neo-aspect-ratio-helper)** by abzaloff, the Forge Neo fork of [thomasasfk's Aspect Ratio Helper](https://github.com/thomasasfk/sd-webui-aspect-ratio-helper) - a ratio dropdown and scale buttons; not tested side by side with Resolution Plus
 - **[SD Simple Dimension Preset](https://github.com/gutris1/sd-simple-dimension-preset)** by gutris1 - a preset button for width and height; not tested side by side with Resolution Plus
 
 ## 🧭 How the Ceiling Is Lifted

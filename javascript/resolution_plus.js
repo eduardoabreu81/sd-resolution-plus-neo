@@ -10,6 +10,7 @@
         presets: "resolution_plus_presets",
         img2img: "resolution_plus_img2img",
         keepRatio: "resolution_plus_tier_keeps_ratio",
+        yieldRatio: "resolution_plus_yield_ratio",
     };
     const DEFAULTS = {
         [KEY.ratios]: "1:1, 2:3, 3:4, 4:5, 9:16, 9:21",
@@ -17,7 +18,11 @@
         [KEY.presets]: "",
         [KEY.img2img]: true,
         [KEY.keepRatio]: true,
+        [KEY.yieldRatio]: true,
     };
+    // Aspect Ratio Helper (Neo), abzaloff/forge-neo-aspect-ratio-helper: its ratio <select>, and the box where it puts
+    // it with its own copy of Forge's ⇅ (it takes Forge's button out of the column)
+    const HELPER = { select: (tab) => `${tab}_select_aspect_ratio`, box: (tab) => `${tab}_size_toolbox` };
     const LOCK = "lock";
     const OFF = "off";
 
@@ -317,8 +322,11 @@
             this.modeButton = button("mode", `${NAME}: aspect ratio (Off, lock the current one, or a ratio)`);
             this.presetButton = button("presets", `${NAME}: presets and megapixel tiers`);
             this.presetButton.innerHTML = ICON.presets;
-            swap.before(el("div", { className: "resolution-plus-tools" }, [this.modeButton, this.presetButton]));
-            swap.parentElement.classList.add("resolution-plus-column");
+            // before Aspect Ratio Helper's box when it got here first (Forge's ⇅ is then its copy, inside the box)
+            const anchor = byId(HELPER.box(this.tab)) || swap;
+            this.tools = el("div", { className: "resolution-plus-tools" }, [this.modeButton, this.presetButton]);
+            anchor.before(this.tools);
+            anchor.parentElement.classList.add("resolution-plus-column");
 
             this.readout = el("div", { className: "resolution-plus-readout" });
             hBox.after(this.readout);
@@ -380,8 +388,31 @@
         }
 
         // the size line and the tier shown; cheap, and skipped when nothing changed
+        // with Aspect Ratio Helper (Neo) on, the ratio lock and ⇅ are its job: our Ratio button steps aside (and stays
+        // Off, so two locks never pull the sliders apart); presets, megapixel pages and the size line stay. It sets up
+        // on its own timer, before or after this script, so this is checked on every refresh.
+        coexist() {
+            const helper = !!byId(HELPER.select(this.tab));
+            const yielding = helper && !!opt(KEY.yieldRatio);
+            if (yielding === !!this.yielding) return;
+            this.yielding = yielding;
+            this.modeButton.classList.toggle("resolution-plus-hidden", yielding);
+            if (yielding) {
+                this.mode = OFF; // not stored: our own choice comes back if the helper is turned off
+            } else {
+                this.mode = store.get(`resolution_plus_mode_${this.tab}`) || OFF;
+                if (this.mode === LOCK) {
+                    const { w, h } = this.read();
+                    this.lock = w && h ? w / h : 1;
+                }
+            }
+            if (popup && popup.owner === this && popup.kind === "mode") closePopup();
+            this.showMode();
+        }
+
         refresh() {
             if (!this.readout) return;
+            this.coexist();
             this.followOrientation();
             const { w, h } = this.read();
             const { top } = M().limits(this.lim());

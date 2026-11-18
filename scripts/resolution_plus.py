@@ -25,6 +25,7 @@ KEY_TIERS = "resolution_plus_tiers"
 KEY_PRESETS = "resolution_plus_presets"
 KEY_IMG2IMG = "resolution_plus_img2img"
 KEY_FREE_UNLOCK = "resolution_plus_tier_keeps_ratio"
+KEY_YIELD_RATIO = "resolution_plus_yield_ratio"
 
 
 def _cap():
@@ -77,12 +78,15 @@ def on_ui_settings():
             True, "With the ratio Off, the megapixel pages of the presets start with the current proportion",
         ).info("with a ratio on, they always start with that ratio"),
         KEY_IMG2IMG: OptionInfo(True, "Show the controls in img2img too (Resize to)").needs_reload_ui(),
+        KEY_YIELD_RATIO: OptionInfo(
+            True, "With Aspect Ratio Helper (Neo) on, leave the ratio lock and ⇅ to it",
+        ).info("hides the Ratio button; presets, megapixel pages, the size line and the slider maximum stay"),
     })
     for key, info in options.items():
         shared.opts.add_option(key, info)
 
 
-PAGE_KEYS = (KEY_RATIOS, KEY_TIERS, KEY_PRESETS, KEY_FREE_UNLOCK)
+PAGE_KEYS = (KEY_RATIOS, KEY_TIERS, KEY_PRESETS, KEY_FREE_UNLOCK, KEY_YIELD_RATIO)
 
 
 def on_app_started(_demo, app):
